@@ -1,3 +1,5 @@
+// This file manages tags.
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api.Data;
@@ -5,13 +7,17 @@ using api.Models;
 
 namespace api.Controllers
 {
+    // This controller handles CRUD operations for Tags in the application.
     [ApiController]
     [Route("api/tags")]
+    
+    // The TagsController class provides endpoints to manage tags.
     public class TagsController : ControllerBase
     {
         private readonly AppDbContext _context;
         private readonly ILogger<TagsController> _logger;
 
+        // Constructor that accepts the database context and logger.
         public TagsController(AppDbContext context, ILogger<TagsController> logger)
         {
             _context = context;
@@ -109,7 +115,8 @@ namespace api.Controllers
             }
         }
 
-        private bool TagExists(int id) => 
+        // Helper method to check if a tag exists by ID.
+        private bool TagExists(int id) =>
             _context.Tags.Any(e => e.Id == id);
     }
 }

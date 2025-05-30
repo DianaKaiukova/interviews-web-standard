@@ -1,3 +1,5 @@
+// This file is dedicated for testing the TasksController.
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api.Controllers;
@@ -7,34 +9,39 @@ using Xunit;
 
 namespace api.Tests.Controllers
 {
+    
+    // This class contains unit tests for the TasksController.
     public class TasksControllerTests : IDisposable
     {
         private readonly AppDbContext _context;
         private readonly TasksController _controller;
         private readonly ILogger<TasksController> _logger;
 
+        // This constructor initializes the in-memory database and the controller for testing.
         public TasksControllerTests()
         {
             // Use in-memory database for testing
             var options = new DbContextOptionsBuilder<AppDbContext>()
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
-            
+
             _context = new AppDbContext(options);
             _context.Database.EnsureCreated();
-            
+
             // Initialize logger (using NullLogger for testing)
             _logger = new Logger<TasksController>(new LoggerFactory());
-            
+
             _controller = new TasksController(_context, _logger);
         }
 
+        // This method is called to clean up resources after tests are done.
         public void Dispose()
         {
             _context.Database.EnsureDeleted();
             _context.Dispose();
         }
 
+        // This test verifies that the GetTasks method returns all tasks from the database.
         [Fact]
         public async System.Threading.Tasks.Task GetTasks_ReturnsAllTasks()
         {
@@ -54,6 +61,7 @@ namespace api.Tests.Controllers
             Assert.Equal(2, returnValue.Count);
         }
 
+        // This test verifies that the GetTask method returns a specific task by ID.
         [Fact]
         public async System.Threading.Tasks.Task GetTask_ReturnsTask_WhenExists()
         {
@@ -71,6 +79,7 @@ namespace api.Tests.Controllers
             Assert.Equal(task.Id, returnValue.Id);
         }
 
+        // This test verifies that the GetTask method returns NotFound when the task does not exist.
         [Fact]
         public async System.Threading.Tasks.Task GetTask_ReturnsNotFound_WhenNotExists()
         {
@@ -81,6 +90,7 @@ namespace api.Tests.Controllers
             Assert.IsType<NotFoundResult>(result.Result);
         }
 
+        // This test verifies that the CreateTask method returns a created task.
         [Fact]
         public async System.Threading.Tasks.Task CreateTask_ReturnsCreatedTask()
         {
@@ -97,6 +107,7 @@ namespace api.Tests.Controllers
             Assert.True(returnValue.Id > 0);
         }
 
+        // This test verifies that the CreateTask method returns BadRequest when the model state is invalid.
         [Fact]
         public async System.Threading.Tasks.Task UpdateTask_ReturnsNoContent_WhenSuccessful()
         {
@@ -113,12 +124,13 @@ namespace api.Tests.Controllers
 
             // Assert
             Assert.IsType<NoContentResult>(result);
-            
+
             // Verify update
             var updatedTask = await _context.Tasks.FindAsync(task.Id);
             Assert.Equal("Updated Title", updatedTask?.Title);
         }
 
+        // This test verifies that the UpdateTask method returns NotFound when the task does not exist.
         [Fact]
         public async System.Threading.Tasks.Task DeleteTask_ReturnsNoContent_WhenSuccessful()
         {
@@ -132,12 +144,13 @@ namespace api.Tests.Controllers
 
             // Assert
             Assert.IsType<NoContentResult>(result);
-            
+
             // Verify deletion
             var deletedTask = await _context.Tasks.FindAsync(task.Id);
             Assert.Null(deletedTask);
         }
 
+        // This test verifies that the DeleteTask method returns NotFound when the task does not exist.
         [Fact]
         public async System.Threading.Tasks.Task AddTagsToTask_AddsRelationships()
         {
@@ -145,7 +158,7 @@ namespace api.Tests.Controllers
             var task = new api.Models.Task { Title = "Task with tags" };
             var tag1 = new Tag { Name = "Tag 1" };
             var tag2 = new Tag { Name = "Tag 2" };
-            
+
             _context.Tasks.Add(task);
             _context.Tags.AddRange(tag1, tag2);
             await _context.SaveChangesAsync();
@@ -155,12 +168,12 @@ namespace api.Tests.Controllers
 
             // Assert
             Assert.IsType<NoContentResult>(result);
-            
+
             // Verify relationships
             var taskTags = await _context.TaskTags
                 .Where(tt => tt.TaskId == task.Id)
                 .ToListAsync();
-                
+
             Assert.Equal(2, taskTags.Count);
         }
     }

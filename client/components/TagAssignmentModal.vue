@@ -1,3 +1,5 @@
+'<!-- TagAssignmentModal.vue -->'
+
 <template>
   <Transition name="modal">
     <div v-if="show" class="fixed inset-0 z-50 overflow-y-auto">
@@ -10,7 +12,8 @@
             <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
               Assign Tags to: {{ task?.title }}
             </h3>
-            
+
+            '<!-- Display current tags if any -->'
             <div class="flex flex-wrap gap-2 mb-4">
               <span 
                 v-for="tag in task?.tags" 
@@ -20,7 +23,8 @@
                 {{ tag.name }}
               </span>
             </div>
-            
+
+            '<!-- Available Tags Section -->'
             <div class="mt-4">
               <label class="block text-sm font-medium text-gray-700 mb-2">Available Tags</label>
               <div class="space-y-2 max-h-60 overflow-y-auto">
@@ -30,6 +34,8 @@
                   class="flex items-center px-4 py-2 border rounded hover:bg-gray-50 cursor-pointer"
                   @click="toggleTagSelection(tag.id)"
                 >
+
+                  '<!-- Checkbox for selecting tags -->'
                   <input 
                     type="checkbox" 
                     :checked="selectedTags.includes(tag.id)"
@@ -41,12 +47,15 @@
             </div>
           </div>
           
+          '<!-- Modal Footer with Save and Cancel Buttons -->'
           <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button 
               type="button" 
               @click="save"
               class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-600 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
             >
+
+            '<!-- Save Button -->'
               Save Tags
             </button>
             <button 
@@ -66,6 +75,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
+'<!-- Importing useNuxtApp to access the API client -->'
 const { $api } = useNuxtApp()
 
 const props = defineProps({
@@ -75,9 +85,11 @@ const props = defineProps({
 
 const emit = defineEmits(['update:show', 'save'])
 
+'<!-- Reactive variables for available tags and selected tags -->'
 const availableTags = ref<any[]>([])
 const selectedTags = ref<number[]>([])
 
+'<!-- Watch for changes in the task prop to fetch tags and set selected tags accordingly -->'
 watch(() => props.task, async (newTask) => {
   if (newTask) {
     try {
@@ -95,6 +107,7 @@ watch(() => props.task, async (newTask) => {
   }
 }, { immediate: true })
 
+'<!-- Function to toggle tag selection -->'
 const toggleTagSelection = (tagId: number) => {
   if (selectedTags.value.includes(tagId)) {
     selectedTags.value = selectedTags.value.filter(id => id !== tagId)
@@ -103,6 +116,7 @@ const toggleTagSelection = (tagId: number) => {
   }
 }
 
+'<!-- Function to save selected tags and emit the event -->'
 const save = () => {
   emit('save', selectedTags.value)
   emit('update:show', false)

@@ -1,3 +1,6 @@
+// This file manages tasks and their associated tags.
+
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api.Data;
@@ -5,10 +8,15 @@ using api.Models;
 
 namespace api.Controllers
 {
+    // This controller handles CRUD operations for Tasks in the application.
     [ApiController]
     [Route("api/tasks")]
+    
+    // The TasksController class provides endpoints to manage tasks.
     public class TasksController : ControllerBase
     {
+
+        // This controller manages tasks and their associated tags.
         private readonly AppDbContext _context;
         private readonly ILogger<TasksController> _logger;
 
@@ -151,7 +159,8 @@ namespace api.Controllers
             }
         }
 
-        private bool TaskExists(int id) => 
+        // DELETE: api/tasks/5/tags/3
+        private bool TaskExists(int id) =>
             _context.Tasks.Any(e => e.Id == id);
     }
 }

@@ -1,3 +1,5 @@
+'<!-- This is a Vue 3 component for a modal dialog to create or edit tags. -->'
+
 <template>
   <Transition name="modal">
     <div v-if="show" class="fixed inset-0 z-50 overflow-y-auto">
@@ -11,6 +13,7 @@
               {{ formData.id ? 'Edit Tag' : 'Create Tag' }}
             </h3>
             
+            '<!-- Form for creating or editing a tag -->'
             <div class="mb-4">
               <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
               <input 
@@ -23,12 +26,16 @@
             </div>
           </div>
           
+          '<!-- Modal Footer with Save and Cancel Buttons -->'
           <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button 
               type="button" 
               @click="save"
               class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-600 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
             >
+
+            '<!-- Save Button -->'
+              {{ formData.id ? 'Update' : 'Create' }}
               Save
             </button>
             <button 
@@ -48,11 +55,13 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
+'<! This is a Vue 3 component for a modal dialog to create or edit tags. -->'
 const props = defineProps({
   show: Boolean,
   tag: Object
 })
 
+'<!-- Define the type for the tag prop -->'
 const emit = defineEmits(['update:show', 'save'])
 
 const formData = ref({
@@ -60,6 +69,7 @@ const formData = ref({
   name: ''
 })
 
+'<!-- Watch for changes in the tag prop and update formData accordingly -->'
 watch(() => props.tag, (newTag) => {
   if (newTag) {
     formData.value = { id: newTag.id ?? null, name: newTag.name ?? '' }
@@ -68,6 +78,7 @@ watch(() => props.tag, (newTag) => {
   }
 }, { immediate: true })
 
+'<!-- Function to save the tag and emit the save event -->'
 const save = () => {
   emit('save', { ...formData.value })
   emit('update:show', false)

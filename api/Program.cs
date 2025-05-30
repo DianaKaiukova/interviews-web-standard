@@ -3,8 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
+
+// Create a new web application builder
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure CORS to allow all origins, methods, and headers
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAll", policy => {
         policy.AllowAnyOrigin()
@@ -18,15 +21,18 @@ builder.Services.AddCors(options => {
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+//  Add controllers and configure JSON options
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
     });
 
+// Register Swagger services
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Register other services
 var app = builder.Build();
 
 // Use CORS - MUST come before other middleware
@@ -50,6 +56,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Configure the HTTP request pipeline
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();

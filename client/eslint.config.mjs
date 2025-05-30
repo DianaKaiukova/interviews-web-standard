@@ -1,6 +1,9 @@
 // @ts-check
-import withNuxt from './.nuxt/eslint.config.mjs'
-
-export default withNuxt(
-  // Your custom configs here
-)
+export default {
+  // Your custom ESLint configs here
+  root: true,
+  extends: [
+    'eslint:recommended',
+    // Add other configs as needed
+  ],
+}
