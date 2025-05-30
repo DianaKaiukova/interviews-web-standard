@@ -1,5 +1,8 @@
-Project Documentation: Task Management System
-1. Prerequisites
+## Project Documentation: Task Management System
+
+
+# 1. Prerequisites
+
 .NET 8 SDK: Download
 
 Node.js 18+: Download
@@ -8,23 +11,31 @@ SQLite: Comes pre-installed with .NET
 
 Git: Download
 
-2. Project Structure
+
+# 2. Project Structure
+
 task-management/
 ├── api/          # .NET 8 API backend
 └── client/       # Nuxt 3 frontend
-3. Setup & Run API
-bash
-# Navigate to API directory
+
+# 3. Setup & Run API
+
+Navigate to API directory
+
 cd api
 
-# Restore dependencies
+Restore dependencies
+
 dotnet restore
 
-# Apply database migrations
+Apply database migrations
+
 dotnet ef database update
 
-# Run the API (default port: 5221)
+Run the API (default port: 5221)
+
 dotnet run
+
 API Endpoints:
 
 Tasks: GET/POST/PUT/DELETE http://localhost:5221/api/tasks
@@ -33,36 +44,46 @@ Tags: GET/POST/PUT/DELETE http://localhost:5221/api/tags
 
 Swagger UI: http://localhost:5221/swagger
 
-4. Setup & Run Client
-bash
-# Navigate to client directory
+# 4. Setup & Run Client
+
+Navigate to client directory
+
 cd client
 
-# Install dependencies
+Install dependencies
+
 npm install
 
-# Run the client (default port: 3000)
+Run the client (default port: 3000)
+
 npm run dev
+
 Client Routes:
 
 Tasks: http://localhost:3000/
 
 Tags: http://localhost:3000/tags
 
-5. Environment Configuration
+# 5. Environment Configuration
+
 API Port:
 
 Change in api/Properties/launchSettings.json:
 
 json
+
 "applicationUrl": "http://0.0.0.0:5221"
+
 Client API Base URL:
 
 Create .env file in client/:
 
 env
+
 API_BASE=http://localhost:5221
-6. Key Features
+
+# 6. Key Features
+
 Task Management:
 
 Create, edit, delete tasks
@@ -83,7 +104,8 @@ Responsive UI:
 
 Works on mobile and desktop
 
-7. Troubleshooting
+# 7. Troubleshooting
+
 Common Issues:
 
 Port Conflicts:
@@ -92,10 +114,12 @@ Change ports in launchSettings.json (API) or nuxt.config.ts (client)
 
 Database Issues:
 
-bash
 cd api
+
 dotnet ef database drop --force
+
 dotnet ef database update
+
 CORS Errors:
 
 Ensure app.UseCors("AllowAll") is in Program.cs
@@ -105,14 +129,19 @@ Verify client's .env matches API port
 Firewall Blocking:
 
 powershell
-# Run as Administrator:
+
+#Run as Administrator:
+
 New-NetFirewallRule -DisplayName "Allow API Port" -Direction Inbound -LocalPort 5221 -Protocol TCP -Action Allow
-8. Testing
+
+# 8. Testing
+
 API Tests:
 
-bash
 cd api.Tests
+
 dotnet test
+
 Client Manual Testing:
 
 Create tasks with different titles
@@ -123,7 +152,8 @@ Assign tags to tasks
 
 Verify updates persist after refresh
 
-9. Deployment
+# 9. Deployment
+
 API:
 
 Publish to Azure App Service or Docker container
@@ -134,6 +164,6 @@ Client:
 
 Static hosting (Netlify, Vercel, Azure Static Web Apps):
 
-bash
 cd client
+
 npm run generate
