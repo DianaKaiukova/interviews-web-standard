@@ -32,7 +32,16 @@
           :key="tag.id"
           class="border rounded-lg p-4 flex justify-between items-center"
         >
-          <span class="font-medium">{{ tag.name }}</span>
+          <span
+            class="font-medium flex items-center"
+          >
+            <span
+              v-if="tag.color"
+              :style="{ backgroundColor: tag.color }"
+              class="w-4 h-4 rounded-full inline-block mr-2 border"
+            ></span>
+            {{ tag.name }}
+          </span>
           <div class="flex space-x-2">
             <button @click="openEditTag(tag)" class="text-blue-500 hover:text-blue-700">
               <PencilIcon class="w-5 h-5" />

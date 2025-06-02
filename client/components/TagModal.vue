@@ -1,5 +1,4 @@
-'<!-- This is a Vue 3 component for a modal dialog to create or edit tags. -->'
-
+<!-- filepath: d:\Applications\Infeon\Additional_task\final\interviews-web-standard\client\components\TagModal.vue -->
 <template>
   <Transition name="modal">
     <div v-if="show" class="fixed inset-0 z-50 overflow-y-auto">
@@ -12,8 +11,7 @@
             <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
               {{ formData.id ? 'Edit Tag' : 'Create Tag' }}
             </h3>
-            
-            '<!-- Form for creating or editing a tag -->'
+            <!-- Form for creating or editing a tag -->
             <div class="mb-4">
               <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
               <input 
@@ -24,19 +22,24 @@
                 class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               >
             </div>
+            <div class="mb-4">
+              <label for="color" class="block text-sm font-medium text-gray-700">Color</label>
+              <input
+                type="color"
+                id="color"
+                v-model="formData.color"
+                class="mt-1 block w-16 h-10 p-0 border-0 bg-transparent"
+              >
+            </div>
           </div>
-          
-          '<!-- Modal Footer with Save and Cancel Buttons -->'
+          <!-- Modal Footer with Save and Cancel Buttons -->
           <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button 
               type="button" 
               @click="save"
               class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-600 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
             >
-
-            '<!-- Save Button -->'
               {{ formData.id ? 'Update' : 'Create' }}
-              Save
             </button>
             <button 
               type="button" 
@@ -55,30 +58,31 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
-'<! This is a Vue 3 component for a modal dialog to create or edit tags. -->'
 const props = defineProps({
   show: Boolean,
   tag: Object
 })
 
-'<!-- Define the type for the tag prop -->'
 const emit = defineEmits(['update:show', 'save'])
 
 const formData = ref({
   id: null as number | null,
-  name: ''
+  name: '',
+  color: '#3b82f6'
 })
 
-'<!-- Watch for changes in the tag prop and update formData accordingly -->'
 watch(() => props.tag, (newTag) => {
   if (newTag) {
-    formData.value = { id: newTag.id ?? null, name: newTag.name ?? '' }
+    formData.value = { 
+      id: newTag.id ?? null, 
+      name: newTag.name ?? '', 
+      color: newTag.color ?? '#3b82f6' 
+    }
   } else {
-    formData.value = { id: null, name: '' }
+    formData.value = { id: null, name: '', color: '#3b82f6' }
   }
 }, { immediate: true })
 
-'<!-- Function to save the tag and emit the save event -->'
 const save = () => {
   emit('save', { ...formData.value })
   emit('update:show', false)

@@ -10,7 +10,7 @@ namespace api.Controllers
     // This controller handles CRUD operations for Tags in the application.
     [ApiController]
     [Route("api/tags")]
-    
+
     // The TagsController class provides endpoints to manage tags.
     public class TagsController : ControllerBase
     {
@@ -70,9 +70,11 @@ namespace api.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
+            // Create a new tag from the provided DTO and set a color if provided.
             var tag = new Tag
             {
-                Name = dto.Name ?? string.Empty
+                Name = dto.Name ?? string.Empty,
+                Color = dto.Color
             };
 
             _context.Tags.Add(tag);
@@ -89,6 +91,7 @@ namespace api.Controllers
             if (tag == null) return NotFound();
 
             tag.Name = dto.Name ?? string.Empty;
+            tag.Color = dto.Color;
 
             await _context.SaveChangesAsync();
             return NoContent();
@@ -120,3 +123,4 @@ namespace api.Controllers
             _context.Tags.Any(e => e.Id == id);
     }
 }
+

@@ -48,8 +48,8 @@ namespace api.Tests.Controllers
         {
             // Arrange
             _context.Tags.AddRange(
-                new Tag { Name = "Tag 1" },
-                new Tag { Name = "Tag 2" }
+                new Tag { Name = "Tag 1", Color = "Red" },
+                new Tag { Name = "Tag 2", Color = "Blue" }
             );
             await _context.SaveChangesAsync();
 
