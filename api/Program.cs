@@ -35,7 +35,6 @@ builder.Services.AddSwaggerGen();
 // Register other services
 var app = builder.Build();
 
-// Use CORS - MUST come before other middleware
 app.UseCors("AllowAll");
 
 app.Urls.Add("http://localhost:5221");
