@@ -11,7 +11,7 @@
               {{ formData.id ? 'Edit Task' : 'Create Task' }}
             </h3>
             
-            '<!-- Form for creating or editing a task -->'
+            <!-- Form for creating or editing a task -->
             <div class="mb-4">
               <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
               <input 
@@ -23,7 +23,7 @@
               >
             </div>
             
-            '<!-- Description field for the task -->'
+            <!-- Description field for the task -->
             <div class="mb-4">
               <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
               <textarea 
@@ -35,14 +35,14 @@
             </div>
           </div>
           
-          '<!-- Modal Footer with Save and Cancel Buttons -->'
+          <!-- Modal Footer with Save and Cancel Buttons -->
           <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
             <button 
               type="button" 
               @click="save"
               class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-500 text-base font-medium text-white hover:bg-blue-600 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
             >
-            '<!-- Save Button -->'
+            <!-- Save Button -->
               {{ formData.id ? 'Update' : 'Create' }}
               Save
             </button>
@@ -60,7 +60,7 @@
   </Transition>
 </template>
 
-'<!-- TaskModal.vue -->'
+<!-- TaskModal.vue -->
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
@@ -100,7 +100,7 @@ const save = () => {
 }
 </script>
 
-'<!-- TaskModal.vue -->'
+<!-- TaskModal.vue -->
 <style scoped>
 .modal-enter-active, .modal-leave-active {
   transition: opacity 0.3s;

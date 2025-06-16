@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LlDqKv4jSoA=",
+  "dgSpecHash": "X3ArelCyMEU=",
   "success": true,
-  "projectFilePath": "D:\\Applications\\Infeon\\Additional_task\\final\\interviews-web-standard\\api\\api.csproj",
+  "projectFilePath": "D:\\Applications\\Infineon\\Additional_task\\interviews-web-standard\\api\\api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Professional\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Professional\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",

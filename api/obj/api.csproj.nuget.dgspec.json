@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Applications\\Infeon\\Additional_task\\final\\interviews-web-standard\\api\\api.csproj": {}
+    "D:\\Applications\\Infineon\\Additional_task\\interviews-web-standard\\api\\api.csproj": {}
   },
   "projects": {
-    "D:\\Applications\\Infeon\\Additional_task\\final\\interviews-web-standard\\api\\api.csproj": {
+    "D:\\Applications\\Infineon\\Additional_task\\interviews-web-standard\\api\\api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Applications\\Infeon\\Additional_task\\final\\interviews-web-standard\\api\\api.csproj",
+        "projectUniqueName": "D:\\Applications\\Infineon\\Additional_task\\interviews-web-standard\\api\\api.csproj",
         "projectName": "api",
-        "projectPath": "D:\\Applications\\Infeon\\Additional_task\\final\\interviews-web-standard\\api\\api.csproj",
+        "projectPath": "D:\\Applications\\Infineon\\Additional_task\\interviews-web-standard\\api\\api.csproj",
         "packagesPath": "C:\\Users\\Professional\\.nuget\\packages\\",
-        "outputPath": "D:\\Applications\\Infeon\\Additional_task\\final\\interviews-web-standard\\api\\obj\\",
+        "outputPath": "D:\\Applications\\Infineon\\Additional_task\\interviews-web-standard\\api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Professional\\AppData\\Roaming\\NuGet\\NuGet.Config"
